@@ -1,0 +1,29 @@
+<ion-view view-title="Chats" class="book">
+  <div class="book-search" app-search search="searchText" placehold="搜索你想听的书籍"  run-search="toSearchBook(search)"></div>
+  <ion-content class="book-scroll">
+    <ul class="book-list">
+      <li class="book-item" ng-repeat="item in books | filter: searchText">
+        <div class="book-logo">
+          <img ng-src="{{item.image}}">
+        </div>
+        <div class="book-desc">
+          <div class="title">{{item.title}}<span class="subTitle" ng-if="item.subtitle"> : {{item.subtitle}}</span></div>
+          <div class="author">
+            <span ng-repeat="author in item.author">{{author}}/</span>
+            <span>{{item.publisher}}/</span>
+            <span>{{item.pubdate}}</span>
+          </div>
+          <div class="price">￥{{item.price}}</div>
+        </div>
+
+      </li>
+    </ul>
+
+    <ion-infinite-scroll
+      ng-if="count < books.total"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

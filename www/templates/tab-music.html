@@ -1,0 +1,21 @@
+<ion-view view-title="音乐" class="music">
+  <audio class="audio" ng-src="{{musicUrl | trusted}}" autoplay controls></audio>
+  <div class="book-search" app-search search="q" placehold="搜索你想听的音乐！" run-search="toSearchMusic(search)"></div>
+  <ion-content class="book-scroll">
+
+    <div class="list">
+      <a class="item item-thumbnail-left" collection-repeat="music in musicDetail | filter: q" ng-click="play(music.id)">
+        <img ng-src="{{music.al.picUrl}}">
+        <h2>{{music.al.name}}</h2>
+        <p>{{music.ar[0].name}}</p>
+      </a>
+    </div>
+
+    <ion-infinite-scroll
+      ng-if="count < musicDetail.total"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>
